@@ -8,8 +8,8 @@ const userSchema = new Schema({
   isLoggedIn: Boolean,
   lastLogIn: Number,
   password: { type: String, required: true },
-  friends: [{ type: Schema.Types.ObjectId, ref: "user" }],
-  isActive:{ type: Boolean, default: true }
+  friends: [{ type: Schema.Types.ObjectId, ref: "user" }], // this just makes an array of these friends id 
+  isActive:{ type: Boolean, default: true } 
 });
 
 const User = mongoose.model("user", userSchema);

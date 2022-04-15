@@ -6,7 +6,11 @@ import chatApi from "./server/routes/chatApi.js";
 import userApi from "./server/routes/userApi.js";
 import auth from "./services/Auth.js";
 
+
+
 dotenv.config()
+
+
 const mongoUri = process.env.MONGO_URI
 mongoose.connect(mongoUri,function () {
   console.log("connected");
