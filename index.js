@@ -1,40 +1,24 @@
 import express from "express";
+import mongoose from "mongoose";
+import * as dotenv from 'dotenv';
+
+import chatApi from "./server/routes/chatApi.js";
+import userApi from "./server/routes/userApi.js";
 import auth from "./services/Auth.js";
+
+dotenv.config()
+const mongoUri = process.env.MONGO_URI
+mongoose.connect(mongoUri,function () {
+  console.log("connected");
+})
+
 const app = express();
-const msgs = [];
-app.use("/greet/:user", auth);
 app.use(express.json());
-app.post("/greet/:user/:msg?", function (req, res) {
-  const msg = req.body;
-  msg.id = Date.now();
-  msgs.push(msg);
-  res.send({ msg: "your msg has been saved" });
-});
+app.use('/user',userApi)
+app.use("/greet/:user", auth);
+app.use('/greet',chatApi)
 
-app.get("/greet/:user/", function (req, res) {
-  res.send(msgs);
-});
-
-app.delete("/greet/:user/:id", function (req, res) {
-  const { id } = req.params;
-  console.log(id);
-  const index = msgs.findIndex((m) => m.id == id);
-  console.log(index);
-  const [msg] = msgs.splice(index, 1);
-  console.log(msg);
-  res.send({ msg: "msg with id: " + msg.id + "  has been deleted" });
-});
-
-const PORT = 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, function () {
   console.log("Up and running on Port: " + PORT);
 });
-
-// deconstructing lesson
-const user = { name: "suad", age: "12" };
-
-const { name } = user;
-
-const arr = [{ msg: "asdas" }];
-
-const [msg] = arr;

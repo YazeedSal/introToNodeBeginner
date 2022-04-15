@@ -5,12 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.26.1",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "mongoose": "^6.2.9"
   }
