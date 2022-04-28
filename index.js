@@ -17,7 +17,7 @@ mongoose.connect(mongoUri,function () {
 })
 
 const app = express();
-app.use(express.json());
+app.use(express.json());// this does the parcing for the jsons that are coming from the body
 app.use('/user',userApi)
 app.use("/greet/:user", auth);
 app.use('/greet',chatApi)
